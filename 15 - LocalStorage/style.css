@@ -70,6 +70,13 @@ h2 {
   content: "🌮";
 }
 
+.plates button {
+  outline: 0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
 .add-items {
   margin-top: 20px;
 }

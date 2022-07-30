@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Scoped CSS Variables and JS</title>
 </head>
+
 <body>
   <h2>Update CSS Variables with <span class='hl'>JS</span></h2>
 
@@ -21,6 +23,21 @@
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
+    :root {
+      --spacing: 10px;
+      --blur: 5px;
+      --base: rgb(84, 40, 154);
+    }
+
+    img {
+      background: var(--base);
+      padding: var(--spacing);
+      filter: blur(var(--blur));
+    }
+
+    .hl {
+      color: var(--base);
+    }
 
     /*
       misc styles, nothing to do with CSS variables
@@ -45,7 +62,18 @@
   </style>
 
   <script>
+    const inputs = document.querySelectorAll('.controls input');
+    inputs.forEach(input => input.addEventListener('input', handleUpdate));
+
+    function handleUpdate() {
+      // console.log(this.value);
+      const suffix = this.dataset.sizing || '';
+      const value = this.value;
+
+      document.documentElement.style.setProperty(`--${this.name}`, `${value}${suffix}`);
+    }
   </script>
 
 </body>
+
 </html>

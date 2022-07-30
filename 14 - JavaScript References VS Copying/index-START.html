@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>JS Reference VS Copy</title>
 </head>
-<body>
 
+<body>
   <script>
     // start with strings, numbers and booleans
 
@@ -43,7 +44,8 @@
     };
 
     // and think we make a copy:
-
+    const wes = { ...person }
+    console.log(wes)
     // how do we take a copy instead?
 
     // We will hopefully soon see the object ...spread
@@ -53,4 +55,5 @@
   </script>
 
 </body>
+
 </html>

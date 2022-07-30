@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <title>JS Drum Kit</title>
@@ -58,9 +58,42 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+  /**
+   * 监听键盘事件，如果按下了 A-L 之间的键：
+   * 1. 改变对应按键的样式
+   * 2. 播放对应音效
+   */
+  let keys = document.querySelectorAll('.key');
+  let audios = document.querySelectorAll('audio');
 
+  document.addEventListener('keydown', (e) => {
+    console.log(this);
+
+    handlerKeyDown(e)
+  });
+  keys.forEach(key => key.addEventListener('transitionend', removeClass));
+
+  function handlerKeyDown(e) {
+    const nodes = getNode(e.keyCode);
+    if (!nodes) return;
+
+    nodes[0].classList.add('playing');
+    nodes[1].currentTime = 0;
+    nodes[1].play();
+  }
+
+  function removeClass(e) {
+    if (e.propertyName !== 'transform') return;
+    this.classList.remove('playing');
+  }
+
+  function getNode(keycode) { 
+    let key = Array.from(keys).find(key => key.dataset.key == keycode);
+    let audio = Array.from(audios).find(audio => audio.dataset.key == keycode);
+
+    return key === undefined ? null : [key, audio];
+  }
 </script>
-
 
 </body>
 </html>

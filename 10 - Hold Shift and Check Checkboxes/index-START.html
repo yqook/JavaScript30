@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Hold Shift to Check Multiple Checkboxes</title>
 </head>
+
 <body>
   <style>
-
     html {
       font-family: sans-serif;
       background: #ffc600;
@@ -17,7 +18,7 @@
       margin: 50px auto;
       background: white;
       border-radius: 5px;
-      box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+      box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.1);
     }
 
     .item {
@@ -30,7 +31,7 @@
       border-bottom: 0;
     }
 
-    input:checked + p {
+    input:checked+p {
       background: #F9F9F9;
       text-decoration: line-through;
     }
@@ -39,23 +40,31 @@
       margin: 20px;
     }
 
+    .last-selected.active input {
+      animation: show-last-selected 0.4s ease-out infinite;
+    }
+
+    @keyframes show-last-selected {
+      from {
+        transform: scale(0.9);
+      }
+
+      to {
+        transform: scale(1.2);
+      }
+    }
+
     p {
       margin: 0;
       padding: 20px;
       transition: background 0.2s;
       flex: 1;
-      font-family:'helvetica neue';
+      font-family: 'helvetica neue';
       font-size: 20px;
       font-weight: 200;
       border-left: 1px solid #D1E2FF;
     }
   </style>
-   <!--
-   The following is a common layout you would see in an email client.
-
-   When a user clicks a checkbox, holds Shift, and then clicks another checkbox a few rows down, all the checkboxes inbetween those two checkboxes should be checked.
-
-  -->
   <div class="inbox">
     <div class="item">
       <input type="checkbox">
@@ -95,7 +104,81 @@
     </div>
   </div>
 
-<script>
-</script>
+  <script>
+    function checkMultiple(e) {
+      const currentInput = this;
+
+      if (e.shiftKey) {
+        checkBetween(currentInput, lastSelected);
+      }
+
+      if (lastSelected) {
+        lastSelected.closest('.item').classList.remove('last-selected', 'active');
+      }
+
+      currentInput.closest('.item').classList.add('last-selected');
+      lastSelected = currentInput;
+    }
+
+    function checkBetween(current, previous) {
+      // let start = end = null;
+      // for (let input of inputs) {
+        
+      //   if (!start) {
+      //     if (input === current) {
+      //       start = current;
+      //       end = previous;
+      //       if (end) {
+      //         end.checked = current.checked;
+      //       }
+      //     }
+
+      //     if (input === previous) {
+      //       start = previous;
+      //       end = current;
+      //       start.checked = current.checked;
+      //     }
+
+      //     continue;
+      //   }
+
+      //   if (end === null || input === end || start === end) return;
+
+      //   input.checked = current.checked;
+      // }
+      let inBetween = false;
+      inputs.forEach(input => {
+        if (input === current || input === lastSelected) {
+          inBetween = !inBetween;
+        }
+
+        if (inBetween && lastSelected !== null && current !== lastSelected) {
+          input.checked = current.checked;
+        }
+      });
+
+      if (lastSelected) {
+        lastSelected.checked = current.checked;
+      }
+    }
+
+    const inputs = document.querySelectorAll('input');
+
+    let lastSelected = null;
+    inputs.forEach(input => input.addEventListener('click', checkMultiple))
+
+    document.addEventListener('keydown', e => {
+      if (e.shiftKey) {
+        lastSelected?.closest('.item').classList.add('active');
+      }
+    })
+
+    document.addEventListener('keyup', e => {
+      if (e.keyCode == 16) {
+        lastSelected?.closest('.item').classList.remove('active');
+      }
+    })
+  </script>
 </body>
+
 </html>
