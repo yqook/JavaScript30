@@ -1,33 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>👀👀👀Follow Along Nav</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <nav>
-      <ul class="menu">
-        <li><a href="">Home</a></li>
-        <li><a href="">Order Status</a></li>
-        <li><a href="">Tweets</a></li>
-        <li><a href="">Read Our History</a></li>
-        <li><a href="">Contact Us</a></li>
-      </ul>
-    </nav>
+  <nav>
+    <ul class="menu">
+      <li><a href="">Home</a></li>
+      <li><a href="">Order Status</a></li>
+      <li><a href="">Tweets</a></li>
+      <li><a href="">Read Our History</a></li>
+      <li><a href="">Contact Us</a></li>
+    </ul>
+  </nav>
 
-    <div class="wrapper">
-      <p>Lorem ipsum dolor sit amet, <a href="">consectetur</a> adipisicing elit. Est <a href="">explicabo</a> unde natus necessitatibus esse obcaecati distinctio, aut itaque, qui vitae!</p>
-      <p>Aspernatur sapiente quae sint <a href="">soluta</a> modi, atque praesentium laborum pariatur earum <a href="">quaerat</a> cupiditate consequuntur facilis ullam dignissimos, aperiam quam veniam.</p>
-      <p>Cum ipsam quod, incidunt sit ex <a href="">tempore</a> placeat maxime <a href="">corrupti</a> possimus <a href="">veritatis</a> ipsum fugit recusandae est doloremque? Hic, <a href="">quibusdam</a>, nulla.</p>
-      <p>Esse quibusdam, ad, ducimus cupiditate <a href="">nulla</a>, quae magni odit <a href="">totam</a> ut consequatur eveniet sunt quam provident sapiente dicta neque quod.</p>
-      <p>Aliquam <a href="">dicta</a> sequi culpa fugiat <a href="">consequuntur</a> pariatur optio ad minima, maxime <a href="">odio</a>, distinctio magni impedit tempore enim repellendus <a href="">repudiandae</a> quas!</p>
-    </div>
+  <div class="wrapper">
+    <p>Lorem ipsum dolor sit amet, <a href="">consectetur</a> adipisicing elit. Est <a href="">explicabo</a> unde natus
+      necessitatibus esse obcaecati distinctio, aut itaque, qui vitae!</p>
+    <p>Aspernatur sapiente quae sint <a href="">soluta</a> modi, atque praesentium laborum pariatur earum <a
+        href="">quaerat</a> cupiditate consequuntur facilis ullam dignissimos, aperiam quam veniam.</p>
+    <p>Cum ipsam quod, incidunt sit ex <a href="">tempore</a> placeat maxime <a href="">corrupti</a> possimus <a
+        href="">veritatis</a> ipsum fugit recusandae est doloremque? Hic, <a href="">quibusdam</a>, nulla.</p>
+    <p>Esse quibusdam, ad, ducimus cupiditate <a href="">nulla</a>, quae magni odit <a href="">totam</a> ut consequatur
+      eveniet sunt quam provident sapiente dicta neque quod.</p>
+    <p>Aliquam <a href="">dicta</a> sequi culpa fugiat <a href="">consequuntur</a> pariatur optio ad minima, maxime <a
+        href="">odio</a>, distinctio magni impedit tempore enim repellendus <a href="">repudiandae</a> quas!</p>
+  </div>
 
+  <span class="highlight"></span>
   <script>
     // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+    const highlight = document.createElement('span');
+    highlight.className = 'highlight';
+    document.body.append(highlight);
+
+    function getPagePos(elem) {
+      let coords = elem.getBoundingClientRect();
+      console.log(coords);
+
+      return {
+        width: coords.width,
+        height: coords.height,
+        top: coords.top + window.pageYOffset,
+        left: coords.left + window.pageXOffset,
+      };
+    }
+
+    function updatePos(a) {
+      const { top, left, width, height } = getPagePos(a);
+
+      const css = `
+        opacity: 1;
+        width: ${width}px;
+        height: ${height}px;
+        transform: translate(${left}px, ${top}px);
+      `;
+
+      // console.log(css)
+      highlight.style.cssText = css;
+    }
+
+    function highlightAnchor(e) {
+      // console.log(e.target);
+      if (currentAnchor) return;
+
+      const a = e.target.closest('a');
+      if (!a) return;
+
+      currentAnchor = a;
+      updatePos(a);
+    }
+
+    function hideHighlighter(e) {
+      if (!currentAnchor) return;
+
+      // 我们将要离开这个元素 —— 去哪儿？可能是去一个后代？
+      let relatedTarget = e.relatedTarget;
+
+      while (relatedTarget) {
+        // 到父链上并检查 —— 我们是否还在 currentElem 内
+        // 然后发现，这只是一个内部移动 —— 忽略它
+        if (relatedTarget == currentAnchor) return;
+
+        relatedTarget = relatedTarget.parentNode;
+      }
+
+      highlight.style.opacity = 0;
+      currentAnchor = null;
+    }
+
+    let currentAnchor = null;
+    document.addEventListener('mouseover', highlightAnchor);
+    document.addEventListener('mouseout', hideHighlighter);
   </script>
 </body>
-</html>
 
+</html>

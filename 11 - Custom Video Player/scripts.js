@@ -23,7 +23,7 @@ function handleProgress() {
     let time = [];
     let a = Math.round(seconds);
     const b = 60;
-    while(a % b) {
+    while(a / b) {
       r = a % b;
       a = (a - r) / b;
       time.push(('0'+ r).slice(-2));

@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Videos</title>
 </head>
+
 <body>
   <ul class="videos">
     <li data-time="5:43">
@@ -171,7 +173,7 @@
     <li data-time="6:03">
       Video 55
     </li>
-    <li data-time="12:39">
+    <li data-time="10:29">
       Video 56
     </li>
     <li data-time="1:56">
@@ -181,7 +183,41 @@
       Video 58
     </li>
   </ul>
-<script>
-</script>
+  <script>
+    "use strict";
+
+    const timeNodes = Array.from(document.querySelectorAll('li[data-time]'));
+    const totalSeconds = timeNodes
+      .map(node => toSeconds(node.dataset.time))
+      .reduce((result, time) => result + time, 0);
+    const totalTime = secondsToClock(totalSeconds);
+
+    console.log(totalTime);
+
+    function toSeconds(clockTime) {
+      const [s, m, h] = clockTime
+        .split(':').reverse()
+        .map(parseFloat); // 此处不能写成 parseInt, 因为它接收3个参数，第二个参数是radix
+        // .map(Number )
+      return s + m * 60 + (h || 0) * 3600;
+    }
+
+    function secondsToClock(seconds) {
+      let clock = [];
+      let a = seconds, b = 60;
+      while(a / b) {
+        const r = a % b;
+        a = (a - r) / b;
+        clock.push(('0' + r).slice(-2));
+      }
+
+      while(clock.length < 2) {
+        clock.push('00');
+      }
+
+      return clock.reverse().join(':');
+    }
+  </script>
 </body>
+
 </html>

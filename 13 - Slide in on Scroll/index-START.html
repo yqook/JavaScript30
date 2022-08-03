@@ -55,17 +55,6 @@
       };
     }
 
-    function throllte(func, wait = 20)  {
-      let timeId;
-
-      return function() {
-        clearTimeout(timeId);
-        timeId = setTimeout(() => {
-          func.apply(this, arguments);
-        }, wait);
-      }
-    }
-
     const imgs = document.querySelectorAll('img.slide-in');
     function updateDisplay() {
       imgs.forEach(img => {
