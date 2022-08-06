@@ -18,133 +18,73 @@
       margin: 1rem 0.5rem;
       padding: 0;
     }
+
+    .tab-nav a {
+      text-decoration: none;
+      display: inline-block;
+      color: currentColor;
+      width: 100px;
+      padding: 20px 10px;
+      text-align: center;
+      background-color: #cdcdcd;
+      border-radius: 10px;
+    }
+
+    .tab-nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: none;
+    }
+
+    .tab-nav:hover ul {
+      display: block;
+    }
+
+    .tab-nav li+li {
+      margin-top: 10px;
+    }
   </style>
 </head>
 
 <body>
 
-  <section class="css-editor-container">
-    <header class="output-header">
-      <h4 class="output-heading">CSS Demo: table-layout</h4>
-      <button id="reset" class="reset" type="button">Reset</button>
-    </header>
-    <div class="editor-wrapper">
-      <section id="example-choice-list" class="example-choice-list large live" data-property="table-layout">
-
-        <div class="example-choice selected">
-          <pre
-            class="language-css"><code class=" language-css" contenteditable="true" spellcheck="false"><span class="token property">table-layout</span><span class="token punctuation">:</span> auto<span class="token punctuation">;</span>
-<span class="token property">width</span><span class="token punctuation">:</span> 150px<span class="token punctuation">;</span></code></pre>
-          <button type="button" class="copy" aria-hidden="false" aria-label="Copy to clipboard">
-            <span class="visually-hidden">Copy to Clipboard</span>
-          </button>
-          <button type="button" class="example-choice-button"><span class="visually-hidden">Choose example
-              1</span></button>
-        </div>
-
-        <div class="example-choice">
-          <pre
-            class=" language-css"><code class=" language-css"><span class="token property">table-layout</span><span class="token punctuation">:</span> fixed<span class="token punctuation">;</span>
-<span class="token property">width</span><span class="token punctuation">:</span> 150px<span class="token punctuation">;</span></code></pre>
-          <button type="button" class="copy hidden" aria-hidden="true" aria-label="Copy to clipboard">
-            <span class="visually-hidden">Copy to Clipboard</span>
-          </button>
-          <button type="button" class="example-choice-button"><span class="visually-hidden">Choose example
-              2</span></button>
-        </div>
-
-        <div class="example-choice">
-          <pre
-            class=" language-css"><code class=" language-css"><span class="token property">table-layout</span><span class="token punctuation">:</span> auto<span class="token punctuation">;</span>
-<span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span></code></pre>
-          <button type="button" class="copy hidden" aria-hidden="true" aria-label="Copy to clipboard">
-            <span class="visually-hidden">Copy to Clipboard</span>
-          </button>
-          <button type="button" class="example-choice-button"><span class="visually-hidden">Choose example
-              3</span></button>
-        </div>
-
-        <div class="example-choice">
-          <pre
-            class=" language-css"><code class=" language-css"><span class="token property">table-layout</span><span class="token punctuation">:</span> fixed<span class="token punctuation">;</span>
-<span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span></code></pre>
-          <button type="button" class="copy hidden" aria-hidden="true" aria-label="Copy to clipboard">
-            <span class="visually-hidden">Copy to Clipboard</span>
-          </button>
-          <button type="button" class="example-choice-button"><span class="visually-hidden">Choose example
-              4</span></button>
-        </div>
-
-      </section>
-
-      <div id="output" class="output large">
-        <section id="default-example" class="default-example">
-          <table id="example-element" class="transition-all" style="table-layout: auto; width: 150px;">
-            <tbody>
-              <tr>
-                <th>Name</th>
-                <th>Location</th>
-              </tr>
-              <tr>
-                <td>Lion</td>
-                <td>Africa</td>
-              </tr>
-              <tr>
-                <td>Norwegian Lemming</td>
-                <td>Europe</td>
-              </tr>
-              <tr>
-                <td>Seal</td>
-                <td>Antarctica</td>
-              </tr>
-              <tr>
-                <td>Tiger</td>
-                <td>Asia</td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
-      </div>
-
+  <div class="tab">
+    <div class="tab-nav">
+      <h3>每日特价</h3>
+      <ul>
+        <li><a href="javascript:;">精选</a></li>
+        <li><a href="javascript:;">美食</a></li>
+        <li><a href="javascript:;">百货</a></li>
+        <li><a href="javascript:;">个护</a></li>
+        <li><a href="javascript:;">预告</a></li>
+      </ul>
     </div>
-  </section>
-  <div id="user-message" class="user-message" aria-hidden="true">Copied!</div>
-  <script src="scripts/css-examples-libs.js"></script>
-  <script src="scripts/editor-css.js"></script>
+
+    <div class="tab-content">
+      <div class="item"><img src="" alt=""></div>
+      <div class="item"><img src="" alt=""></div>
+      <div class="item"><img src="" alt=""></div>
+      <div class="item"><img src="" alt=""></div>
+      <div class="item"><img src="" alt=""></div>
+    </div>
+  </div>
 
   <script>
-    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
-
-    function makeGreen() {
-      const p = document.querySelector('p');
-      p.style.color = '#BADA55';
-      p.style.fontSize = '50px';
+    let random = function (max, min) {
+      return ~~(Math.random() * (max - min + 1) + min);
+    }
+    
+    let jianArray = (len, max, min) => {
+      let arrgood = [];
+      for (let i = 0; i < len; i++) {
+        arrgood[arrgood.length] = random(max, min);
+      }
+      return arrgood;
     }
 
-    // Regular 
-    //
-    // Interpolated
-
-    // Styled
-
-    // warning!
-
-    // Error :|
-
-    // Info
-
-    // Testing
-
-    // clearing
-
-    // Viewing DOM Elements
-
-    // Grouping together
-
-    // counting
-
-    // timing
-
+    let arr1 = jianArray(5, 10, 1);
+    console.log(arr1);
   </script>
 </body>
 

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Whack A Mole!</title>
   <link href='https://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
   <h1>Whack-a-mole! <span class="score">0</span></h1>
@@ -32,11 +34,63 @@
     </div>
   </div>
 
-<script>
-  const holes = document.querySelectorAll('.hole');
-  const scoreBoard = document.querySelector('.score');
-  const moles = document.querySelectorAll('.mole');
+  <script>
+    const holes = document.querySelectorAll('.hole');
+    const scoreBoard = document.querySelector('.score');
+    const moles = document.querySelectorAll('.mole');
+    let lastHole = null, scores = 0;
+    let timeUp = false;
 
-</script>
+    function randomTime(min, max) {
+      return Math.round(Math.random() * (max - min) + min);
+    }
+
+    function randomHole(holes) {
+      const idx = Math.floor(Math.random() * holes.length);
+      const hole = holes[idx];
+      if (lastHole === hole) {
+        console.log("重复了，重新生成中……");
+        return randomHole(holes);
+      }
+
+      lastHole = hole;
+      return hole;
+    }
+
+    function peep() {
+      const hole = randomHole(holes);
+      const time = randomTime(200, 2000);
+      hole.classList.add('up');
+      setTimeout(() => {
+        hole.classList.remove('up');
+        if (!timeUp) peep();
+      }, time);
+    }
+
+    function bonk(e) {
+      if (!e.isTrusted) return;
+      scores++;
+      this.parentNode.classList.remove('up');
+      scoreBoard.textContent = scores;
+    }
+
+    function startGame() {
+      console.clear();
+      scores = 0;
+      timeUp = false;
+      scoreBoard.textContent = '0';
+      lastHole = null;
+      
+      console.time('游戏时间');
+      peep();
+      setTimeout(() => {
+        timeUp = true;
+        console.timeEnd('游戏时间');
+      }, 10 * 1000);
+    }
+
+    moles.forEach(mole => mole.addEventListener('click', bonk))
+  </script>
 </body>
+
 </html>

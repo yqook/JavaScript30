@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Click and Drag</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <div class="items">
     <div class="item item1">01</div>
@@ -34,8 +36,44 @@
     <div class="item item25">25</div>
   </div>
 
-<script>
-</script>
+  <script>
+    const items = document.querySelector('.items');
 
-  </body>
+    function handleDrag(e) {
+      // console.log(e);
+
+      const items = this;
+      items.classList.add('active');
+
+      const start = e.clientX;
+      const current = items.scrollLeft;
+
+      function handleMove(event) {
+        const distance = (event.clientX - start) * 2;
+        console.log(distance)
+        items.scrollTo({
+          left: current + distance,
+          top: 0,
+          behavior: 'instant'
+        })
+      }
+
+      function handleDragend() {
+        items.classList.remove('active');
+
+        items.removeEventListener('mousemove', handleMove);
+        items.removeEventListener('mouseup', handleDragend);
+      }
+
+      items.addEventListener('mousemove', handleMove);
+      document.addEventListener('mouseup', handleDragend);
+    }
+
+    items.addEventListener('mousedown', handleDrag)
+    items.ondragstart = () => false;
+
+  </script>
+
+</body>
+
 </html>

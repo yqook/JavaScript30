@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Follow Along Nav</title>
 </head>
+
 <body>
   <h2>Cool</h2>
   <nav class="top">
@@ -17,7 +19,8 @@
         <div class="dropdown dropdown1">
           <div class="bio">
             <img src="https://logo.clearbit.com/wesbos.com">
-            <p>Wes Bos sure does love web development. He teaches things like JavaScript, CSS and BBQ. Wait. BBQ isn't part of web development. It should be though!</p>
+            <p>Wes Bos sure does love web development. He teaches things like JavaScript, CSS and BBQ. Wait. BBQ isn't
+              part of web development. It should be though!</p>
           </div>
         </div>
       </li>
@@ -74,153 +77,231 @@
     </ul>
   </nav>
 
-<style>
-  html {
-    box-sizing: border-box;
-    font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
-  }
-  
-  *, *:before, *:after {
-    box-sizing: inherit;
-  }
-  
-  body {
-    margin: 0;
-    min-height: 100vh;
-    background:
-      linear-gradient(45deg, hsla(340, 100%, 55%, 1) 0%, hsla(340, 100%, 55%, 0) 70%),
-      linear-gradient(135deg, hsla(225, 95%, 50%, 1) 10%, hsla(225, 95%, 50%, 0) 80%),
-      linear-gradient(225deg, hsla(140, 90%, 50%, 1) 10%, hsla(140, 90%, 50%, 0) 80%),
-      linear-gradient(315deg, hsla(35, 95%, 55%, 1) 100%, hsla(35, 95%, 55%, 0) 70%);
-  }
+  <style>
+    html {
+      box-sizing: border-box;
+      font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+    }
 
-  h2 {
-    margin-top: 0;
-    padding-top: .8em;
-  }
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
 
-  nav {
-    position: relative;
-    perspective: 600px;
-  }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        linear-gradient(45deg, hsla(340, 100%, 55%, 1) 0%, hsla(340, 100%, 55%, 0) 70%),
+        linear-gradient(135deg, hsla(225, 95%, 50%, 1) 10%, hsla(225, 95%, 50%, 0) 80%),
+        linear-gradient(225deg, hsla(140, 90%, 50%, 1) 10%, hsla(140, 90%, 50%, 0) 80%),
+        linear-gradient(315deg, hsla(35, 95%, 55%, 1) 100%, hsla(35, 95%, 55%, 0) 70%);
+    }
 
-  .cool > li > a {
-    color: yellow;
-    text-decoration: none;
-    font-size: 20px;
-    background: rgba(0,0,0,0.2);
-    padding: 10px 20px;
-    display: inline-block;
-    margin: 20px;
-    border-radius: 5px;
-  }
+    h2 {
+      margin-top: 0;
+      padding-top: .8em;
+    }
 
-  nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-  }
+    nav {
+      position: relative;
+      perspective: 600px;
+    }
 
-  .cool > li {
-    position: relative;
-    display: flex;
-    justify-content: center;
-  }
+    .cool>li {
+      margin: 20px;
+      margin-bottom: 0;
+    }
 
-  .dropdown {
-    opacity: 0;
-    position: absolute;
-    overflow: hidden;
-    padding: 20px;
-    top: -20px;
-    border-radius: 2px;
-    transition: all 0.5s;
-    transform: translateY(100px);
-    will-change: opacity;
-    display: none;
-  }
+    .cool>li>a {
+      color: yellow;
+      text-decoration: none;
+      font-size: 20px;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 10px 20px;
+      display: inline-block;
+      margin-bottom: 20px;
+      border-radius: 5px;
+    }
 
-  .trigger-enter .dropdown {
-    display: block;
-  }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+    }
 
-  .trigger-enter-active .dropdown {
-    opacity: 1;
-  }
-  
-  .dropdownBackground {
-    width: 100px;
-    height: 100px;
-    position: absolute;
-    background: #fff;
-    border-radius: 4px;
-    box-shadow: 0 50px 100px rgba(50,50,93,.1), 0 15px 35px rgba(50,50,93,.15), 0 5px 15px rgba(0,0,0,.1);
-    transition: all 0.3s, opacity 0.1s, transform 0.2s;
-    transform-origin: 50% 0;
-    display: flex;
-    justify-content: center;
-    opacity:0;
-  }
+    .cool>li {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
 
-  .dropdownBackground.open {
-    opacity: 1;
-  }
+    .dropdown {
+      opacity: 0;
+      position: absolute;
+      overflow: hidden;
+      padding: 20px;
+      top: -20px;
+      border-radius: 2px;
+      transition: all 0.5s;
+      transform: translateY(80px);
+      will-change: opacity;
+      display: none;
+    }
 
-  .arrow {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    display: block;
-    background: white;
-    transform: translateY(-50%) rotate(45deg);
-  }
+    .trigger-enter .dropdown {
+      display: block;
+    }
 
-  .bio {
-    min-width: 500px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    line-height: 1.7;
-  }
+    .trigger-enter-active .dropdown {
+      opacity: 1;
+    }
 
-  .bio img {
-    float: left;
-    margin-right: 20px;
-  }
+    .dropdownBackground {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      background: #fff;
+      border-radius: 4px;
+      box-shadow: 0 50px 100px rgba(50, 50, 93, .1), 0 15px 35px rgba(50, 50, 93, .15), 0 5px 15px rgba(0, 0, 0, .1);
+      transition: all 0.3s, opacity 0.1s, transform 0.2s;
+      transform-origin: 50% 0;
+      display: flex;
+      justify-content: center;
+      opacity: 0;
+    }
 
-  .courses {
-    min-width: 300px;
-  }
+    .dropdownBackground.open {
+      opacity: 1;
+    }
 
-  .courses li {
-    padding: 10px 0;
-    display: block;
-    border-bottom: 1px solid rgba(0,0,0,0.2);
-  }
+    .arrow {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      display: block;
+      background: white;
+      transform: translateY(-50%) rotate(45deg);
+    }
 
-  .dropdown a {
-    text-decoration: none;
-    color: #ffc600;
-  }
+    .bio {
+      min-width: 500px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      line-height: 1.7;
+    }
 
-  a.button {
-    background: black;
-    display: block;
-    padding: 10px;
-    color: white;
-    margin-bottom: 10px;
-  }
+    .bio img {
+      float: left;
+      margin-right: 20px;
+    }
 
-  /* Matches Twitter, TWITTER, twitter, tWitter, TWiTTeR... */
-  .button[href*=twitter] { background: #019FE9; }
-  .button[href*=facebook] { background: #3B5998; }
-  .button[href*=courses] { background: #ffc600; }
-</style>
+    .courses {
+      min-width: 300px;
+    }
 
-<script>
-</script>
+    .courses li {
+      padding: 10px 0;
+      display: block;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    }
+
+    .dropdown a {
+      text-decoration: none;
+      color: #ffc600;
+    }
+
+    a.button {
+      background: black;
+      display: block;
+      padding: 10px;
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    /* Matches Twitter, TWITTER, twitter, tWitter, TWiTTeR... */
+    .button[href*=twitter] {
+      background: #019FE9;
+    }
+
+    .button[href*=facebook] {
+      background: #3B5998;
+    }
+
+    .button[href*=courses] {
+      background: #ffc600;
+    }
+  </style>
+
+  <script>
+    const nav = document.querySelector('.top');
+    const dropdownBg = document.querySelector('.dropdownBackground')
+    let currentList = null;
+
+    function moveBackground(dropdown) {
+      const dropdownCoords = dropdown.getBoundingClientRect();
+      const navCoords = nav.getBoundingClientRect();
+
+      const coords = {
+        width: dropdownCoords.width,
+        height: dropdownCoords.height,
+        left: dropdownCoords.left + window.scrollX - navCoords.left,
+        top: dropdownCoords.top + window.scrollX - navCoords.top,
+      }
+
+      dropdownBg.style.setProperty('width', `${coords.width}px`);
+      dropdownBg.style.setProperty('height', `${coords.height}px`);
+      dropdownBg.style.setProperty('transform', `translate(${coords.left}px, ${coords.top}px)`);
+    }
+
+    function handleOver(event) {
+      // console.log(event.target)
+
+      if (currentList) return;
+
+      const li = event.target.closest('li');
+      if (!li || !li.matches('.cool>li')) return;
+      
+      li.classList.add('trigger-enter');
+      setTimeout(() => li.classList.contains('trigger-enter') && li.classList.add('trigger-enter-active'), 150);
+
+      dropdownBg.classList.add('open');
+      moveBackground(li.lastElementChild);
+
+      currentList = li;
+      console.log(`进入${currentList.firstElementChild.textContent}`)
+    }
+
+    function handleOut(event) {
+      // console.log(event.target.tagName)
+    
+      if (!currentList) return;
+
+      let relatedTarget = event.relatedTarget;
+      while(relatedTarget) {
+        if (currentList === relatedTarget) return;
+        relatedTarget = relatedTarget.parentNode;
+      }
+
+      const li = event.target.closest('li.trigger-enter');
+      li.classList.remove('trigger-enter', 'trigger-enter-active');
+
+      dropdownBg.classList.remove('open');
+
+      console.log(`离开${currentList.firstElementChild.textContent}`)
+
+      currentList = null;
+    }
+
+    nav.addEventListener('mouseover', handleOver);
+    nav.addEventListener('mouseout', handleOut);
+
+  </script>
 
 </body>
+
 </html>
